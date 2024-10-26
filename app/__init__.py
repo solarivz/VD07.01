@@ -14,3 +14,5 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login' # Модуль будет перенаправлять пользователя на маршрут, который мы указываем (на авторизацию)
 
 from app import routes
+
+

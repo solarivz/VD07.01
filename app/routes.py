@@ -1,14 +1,14 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user, login_required
-from app import models, forms, bcrypt
 from app.models import User
+from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm
-
 
 @app.route('/')
 @app.route('/home')
 def home():
     return render_template('home.html')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -22,9 +22,10 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Вы успешно зарегистрировались', 'success')
-        return redirect(url_for('login')) # отрисовка нашей страницы формы
+        return redirect(url_for('login'))  # отрисовка нашей страницы формы
 
     return render_template('register.html', form=form)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -42,10 +43,12 @@ def login():
 
     return render_template('login.html', form=form)
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
 
 @app.route('/account')
 @login_required
