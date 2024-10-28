@@ -1,28 +1,24 @@
 {% extends "base.html" %}
 
-{% block title %}
-    Вход
-{% endblock %}
-
 {% block content %}
-    <h1>Вход</h1>
-    <form method="POST" action="{{ url_for('login') }}">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.email.label }}<br>
-            {{ form.email(size=64) }}
-        </div>
-        <div>
-            {{ form.password.label }}<br>
-            {{ form.password(size=64) }}
-        </div>
-        <div>
-            {{ form.remember.label }}<br>
-            {{ form.remember }}
-        </div>
-        <div>
-            {{ form.submit() }}
-        </div>
-        
-    </form>
+  <h2>Вход</h2>
+
+  <!-- Блок для отображения сообщений -->
+
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <p>
+      {{ form.email.label }}<br>
+      {{ form.email(size=32) }}
+      {% if form.email.errors %}
+        <span style="color: red;">{{ form.email.errors[0] }}</span>
+      {% endif %}
+    </p>
+    <p>
+      {{ form.password.label }}<br>
+      {{ form.password(size=32) }}
+    </p>
+    <p>{{ form.remember() }} Запомнить меня</p>
+    <p>{{ form.submit() }}</p>
+  </form>
 {% endblock %}

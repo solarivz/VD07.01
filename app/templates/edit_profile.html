@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Регистрация</h2>
+  <h2>Edit Profile</h2>
 
-  <!-- Блок для отображения сообщений -->
+  <!-- Выводим сообщения об ошибках и уведомления -->
   {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
       <ul>
@@ -16,6 +16,7 @@
 
   <form method="POST" action="">
     {{ form.hidden_tag() }}
+
     <p>
       {{ form.username.label }}<br>
       {{ form.username(size=32) }}
@@ -23,6 +24,7 @@
         <span style="color: red;">{{ form.username.errors[0] }}</span>
       {% endif %}
     </p>
+
     <p>
       {{ form.email.label }}<br>
       {{ form.email(size=32) }}
@@ -30,15 +32,23 @@
         <span style="color: red;">{{ form.email.errors[0] }}</span>
       {% endif %}
     </p>
+
     <p>
       {{ form.password.label }}<br>
       {{ form.password(size=32) }}
+      {% if form.password.errors %}
+        <span style="color: red;">{{ form.password.errors[0] }}</span>
+      {% endif %}
     </p>
-    <p>
-       {{ form.confirm_password.label }}<br>
-       {{ form.confirm_password(size=32) }}
 
+    <p>
+      {{ form.confirm_password.label }}<br>
+      {{ form.confirm_password(size=32) }}
+      {% if form.confirm_password.errors %}
+        <span style="color: red;">{{ form.confirm_password.errors[0] }}</span>
+      {% endif %}
     </p>
+
     <p>{{ form.submit() }}</p>
   </form>
 {% endblock %}
